@@ -1,0 +1,123 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Solutions --- Question 2 [35 marks]\\(growth model, $n_0=10$, $m=3$, attractiveness $a>0$)}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+Parameters: $n_0 = 10$, $m = 3$, and each new node attaches with probability proportional to $k_i + a$.
+
+\subsection*{a)}
+
+At time $t \ge 1$ the growth process produces
+\[
+  N(t) = n_0 + (t - 1) = 10 + t - 1 = 9 + t
+\]
+nodes and
+\[
+  L(t) = \binom{n_0}{2} + m(t - 1) = 45 + 3(t - 1) = 42 + 3t
+\]
+links.
+
+\subsection*{b)}
+
+The average degree at time $t$ is
+\[
+  \langle k \rangle = \frac{2L(t)}{N(t)}
+  = \frac{2(42 + 3t)}{9 + t}
+  = \frac{84 + 6t}{9 + t}.
+\]
+In the limit $N \to \infty$ (equivalently $t \to \infty$), $\langle k \rangle \to 2m = 6$.
+
+\subsection*{c)}
+
+The normalization sum is
+\begin{align*}
+  Z &= \sum_{j=1}^{N(t-1)} k_j + \sum_{j=1}^{N(t-1)} a
+   = 2L(t-1) + a N(t-1) \\
+    &= 2\bigl(42 + 3(t - 1)\bigr) + a\bigl(9 + (t - 1)\bigr)
+     = (6 + a)t + 78 + 8a.
+\end{align*}
+For $t \gg 1$, $\displaystyle Z = \sum_{j} (k_j + a) \simeq (6 + a)t$ (the leading term in $t$).
+
+\subsection*{d)}
+
+In the mean-field approximation, for $t \gg 1$,
+\[
+  \frac{dk_i}{dt} = m\,\frac{k_i + a}{\sum_j (k_j + a)}
+  = 3\,\frac{k_i + a}{Z},
+\]
+with initial condition $k_i(t_i) = m = 3$. Using $Z \simeq (6 + a)t$ for $t \gg 1$,
+\[
+  \frac{dk_i}{dt} = 3\,\frac{k_i + a}{(6 + a)t}.
+\]
+Integrating,
+\[
+  \int_{m}^{k_i(t)} \frac{dk_i}{k_i + a}
+  = \frac{3}{6 + a} \int_{t_i}^{t} \frac{dt'}{t'},
+\]
+which gives
+\[
+  k_i(t) = (3 + a)\left(\frac{t}{t_i}\right)^{\frac{3}{6 + a}} - a.
+\]
+
+\subsection*{e)}
+
+The probability that a randomly chosen node has degree strictly greater than $k$ can be written as
+\[
+  P\bigl(k_i(t) > k\bigr)
+  = P\left[
+      (3 + a)\left(\frac{t}{t_i}\right)^{\frac{3}{6 + a}} - a > k
+    \right]
+  = P\left[
+      t_i < t\left(\frac{3 + a}{k + a}\right)^{\frac{6 + a}{3}}
+    \right].
+\]
+Hence
+\[
+  P\bigl(k_i(t) > k\bigr) = \left(\frac{3 + a}{k + a}\right)^{\frac{6 + a}{3}}.
+\]
+The degree distribution follows from
+\[
+  P(k) = \frac{d}{dk}\, P\bigl(k_i(t) < k\bigr)
+  = -\frac{d}{dk}\left(\frac{3 + a}{k + a}\right)^{\frac{6 + a}{3}}
+  = C\left(\frac{1}{k + a}\right)^{\frac{9 + a}{3}},
+\]
+with
+\[
+  C = \frac{6 + a}{3}\,(3 + a)^{\frac{6 + a}{3}}.
+\]
+
+\subsection*{f)}
+
+The model produces a power-law tail: for large $k$,
+\[
+  P(k) \propto k^{-\gamma},
+  \qquad
+  \gamma = 3 + \frac{a}{3} > 3 \quad (\text{since } a > 0).
+\]
+
+\subsection*{g)}
+
+The master equation for the average number $N_k(t)$ of nodes of degree $k$ at time $t$ reads, for $k > m = 3$,
+\[
+  N_k(t + 1)
+  = N_k(t)
+  + 3\,\frac{k - 1 + a}{(6 + a)t}\,N_{k - 1}(t)
+  - 3\,\frac{k + a}{(6 + a)t}\,N_k(t),
+\]
+and for $k = 3$,
+\[
+  N_k(t + 1)
+  = N_k(t)
+  - 3\,\frac{k + a}{(6 + a)t}\,N_k(t)
+  + 1.
+\]
+
+\end{document}

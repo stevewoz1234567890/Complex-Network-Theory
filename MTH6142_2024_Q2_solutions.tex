@@ -1,0 +1,191 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Solutions --- MTH6142 (2024) Question 2\\Growth model ($n_0=6$, $m=2$, $\Pi_i \propto k_i-1$)}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent
+Model: complete graph on $n_0=6$ at $t=1$; each step $t>1$ adds one node and $m=2$ links; $\Pi_i=(k_i-1)/Z$ with $Z=\sum_j(k_j-1)$.
+
+\subsection*{a) Number of nodes, links, and $Z$}
+
+At $t=1$ there are $n_0=6$ nodes. Each subsequent step adds one node, so for $t\ge 1$,
+\[
+  N(t) = n_0 + (t-1) = 6 + (t-1) = t + 5.
+\]
+
+The initial graph is complete, so
+\[
+  L(1) = \frac{n_0(n_0-1)}{2} = \frac{6\cdot 5}{2} = 15.
+\]
+Each new node adds $m=2$ links, hence
+\[
+  L(t) = L(1) + 2(t-1) = 15 + 2(t-1) = 2t + 13.
+\]
+
+The total degree sum at time $t$ is $2L(t) = 4t+26$. With the convention used in the solution key,
+\[
+  Z(t) = 2L(t) - N(t) = (4t + 26) - (t + 5) = 3t + 21.
+\]
+(Equivalently, $Z$ matches $\sum_j(k_j-1)$ up to the same time-index convention as in the notes.)
+
+\subsection*{b) Average degree}
+
+The average degree at time $t$ is the total degree sum divided by the number of nodes:
+\[
+  \langle k \rangle = \frac{2L(t)}{N(t)} = \frac{4t + 26}{t + 5}.
+\]
+In the limit $t\to\infty$,
+\[
+  \langle k \rangle \sim \frac{4t}{t} = 4,
+\]
+so the average degree approaches $4$ (consistent with $2m$).
+
+\subsection*{c) Mean-field equation for $k_i(t)$ and its solution}
+
+The evolution of the degree of node $i$ can be written as
+\[
+  \frac{dk_i}{dt} = 2\,\frac{k_i - 1}{Z(t)}.
+\]
+Inserting $Z(t) = 3t + 21$ from part~(a),
+\[
+  \frac{dk_i}{dt} = 2\,\frac{k_i - 1}{3t + 21}.
+\]
+For $t\gg 1$, approximate $Z(t) \approx 3t$, so
+\[
+  \frac{dk_i}{dt} \approx \frac{2(k_i - 1)}{3t}.
+\]
+Separating variables,
+\[
+  \frac{dk_i}{k_i - 1} = \frac{2}{3t}\,dt.
+\]
+Integrating gives
+\[
+  \ln|k_i - 1| = \frac{2}{3}\ln t + C,
+  \qquad
+  k_i - 1 = C'\, t^{2/3}.
+\]
+The initial condition $k_i(t_i)=m=2$ implies $k_i(t_i)-1=1$, hence $C' = t_i^{-2/3}$ and
+\[
+  k_i(t) = 1 + \left(\frac{t}{t_i}\right)^{2/3}.
+\]
+This describes the growth of the degree of a node that enters at time $t_i$.
+
+\subsection*{d) Degree distribution $P(k)$ and exponent $\gamma$}
+
+From part~(c),
+\[
+  k_i(t) = 1 + \left(\frac{t}{t_i}\right)^{2/3}.
+\]
+Fix $t$ and solve for the arrival time at which the degree equals $k$:
+\[
+  k = 1 + \left(\frac{t}{t_i}\right)^{2/3}
+  \quad\Rightarrow\quad
+  t_i = t\,(k-1)^{-3/2}.
+\]
+
+Using $dt_i$ and $dk/dt$ from the growth law, one finds increments
+\[
+  \Delta t_i = \frac{dt_i}{dk}\,dk \propto -(k-1)^{-5/2}\,dk,
+\]
+so (up to normalization) the density of nodes with degree $k$ satisfies
+\[
+  P(k) \propto (k-1)^{-5/2},
+  \qquad\text{so for large }k,\quad
+  P(k) \propto k^{-5/2}.
+\]
+Thus the network is scale-free with degree exponent
+\[
+  \gamma = \frac{5}{2}.
+\]
+
+\subsection*{e) Master equation for $N_k(t)$}
+
+Let $N_k(t)$ be the number of nodes of degree $k$ at time $t$. The master equation has gain terms from nodes moving $k-1\to k$ and loss terms from $k\to k+1$, plus a source for new nodes of degree $m$:
+\[
+  \frac{\partial N_k}{\partial t}
+  = m\,\frac{(k-1)\,N_{k-1}(t) - k\,N_k(t)}{Z(t)} + \delta_{k,m},
+\]
+where $\delta_{k,m}$ is the Kronecker delta (new nodes arrive with degree $m$ each time step), and $Z(t)$ is the normalization sum as above.
+
+\subsection*{f) Cutoff and moments for $N=10^6$, $m=2$}
+
+Take the continuous approximation $P(k) = C\,k^{-5/2}$ for $k\ge m$.
+
+\paragraph{Natural cutoff $K$.}
+Impose that the expected number of nodes with degree $\ge K$ is of order $1$:
+\[
+  N \int_K^{\infty} P(k)\,dk \approx 1.
+\]
+With $P(k)=Ck^{-5/2}$,
+\[
+  N C \int_K^{\infty} k^{-5/2}\,dk
+  = N C \Bigl[-\tfrac{2}{3} k^{-3/2}\Bigr]_K^{\infty}
+  = N C \cdot \tfrac{2}{3} K^{-3/2} = 1,
+\]
+so
+\[
+  K \approx \left(\frac{2N C}{3}\right)^{2/3}.
+\]
+
+\paragraph{Normalization constant $C$.}
+\[
+  \int_m^{\infty} C k^{-5/2}\,dk = 1
+  \quad\Rightarrow\quad
+  C\cdot \frac{2}{3}\,m^{-3/2} = 1
+  \quad\Rightarrow\quad
+  C = \frac{3}{2}\,m^{3/2}.
+\]
+
+\paragraph{Average degree $\langle k \rangle$ (from the continuous $P(k)$).}
+\[
+  \langle k \rangle = \int_m^{\infty} k\,P(k)\,dk
+  = C \int_m^{\infty} k^{-3/2}\,dk
+  = C \bigl[-2 k^{-1/2}\bigr]_m^{\infty}
+  = 2 C\,m^{-1/2}
+  = 3m.
+\]
+For $m=2$, $\langle k \rangle = 6$.
+
+\paragraph{Second moment $\langle k^2 \rangle$.}
+\[
+  \langle k^2 \rangle = \int_m^{\infty} k^2 P(k)\,dk
+  = C \int_m^{\infty} k^{-1/2}\,dk
+\]
+diverges; in a finite network a natural cutoff $K$ is required for $\langle k^2 \rangle$ to be finite.
+
+\subsection*{g) Probability of degree $1000$; comparison with Erd\H{o}s--R\'enyi}
+
+\paragraph{Scale-free network.}
+With $P(k) = C k^{-5/2}$ and $C = \frac{3}{2} m^{3/2}$, $m=2$,
+\[
+  P(1000) = \frac{3}{2}\,2^{3/2}\,1000^{-5/2}
+  \approx 0.003 \times 1000^{-2.5}
+  \approx 3\times 10^{-11}
+\]
+(order of magnitude as in the notes).
+
+\paragraph{Erd\H{o}s--R\'enyi graph with the same $N$ and $L$.}
+Exact degree distribution (undirected $G(N,p)$):
+\[
+  P(k=1000) = \binom{N-1}{1000}\,p^{1000}(1-p)^{N-1001},
+  \qquad
+  p = \frac{2L}{N(N-1)}.
+\]
+As in the worked notes, approximate $2L \approx 1.2\times 10^{6}$, $N(N-1)\approx 10^{12}$, giving $p \approx 1.2\times 10^{-6}$ and $\lambda = (N-1)p \approx 1.2$. For large $N$ and small $p$, use the Poisson approximation
+\[
+  P(k=1000) \approx \frac{e^{-\lambda}\,\lambda^{1000}}{1000!}.
+\]
+With $\lambda\approx 1.2$, this probability is astronomically small---much smaller than the scale-free estimate---reflecting that ER graphs with small mean degree do not generate hubs like $k=1000$.
+
+\medskip
+\noindent\textit{Remark.} If one instead matches the growth model's large-time mean degree $\langle k\rangle\to 4$ from part~(b), one would take $\lambda\approx 4$ (and the corresponding $p$) in the Poisson approximation; either way $P(1000)$ is negligible.
+
+\end{document}

@@ -1,0 +1,49 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{geometry}
+
+\geometry{margin=2.5cm}
+
+\title{Question 2 [35 marks]}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+Consider a model for growing simple networks with parameters $n_0 = 10$, $m = 3$, and constant $a > 0$. At time $t = 1$ the process starts with a complete network of $n_0$ nodes. At each time step $t > 1$, one new node is added. The new node arrives with $m$ new links, which are connected to $m$ different nodes already present in the network. The probability $\Pi_i$ that a new link is connected to node $i$ is
+\[
+  \Pi_i = \frac{k_i + a}{Z}
+  \qquad\text{with}\qquad
+  Z = \sum_{j=1}^{N(t-1)} (k_j + a),
+\]
+where $k_i$ is the degree of node $i$, and $N(t-1)$ is the number of nodes in the network at time $t-1$.
+
+\begin{enumerate}[label=\textbf{(\alph*)}, leftmargin=*, itemsep=1em]
+
+\item \textbf{[4 marks]}
+Find an expression for the number of nodes, $N(t)$, and the number of links, $L(t)$, in the network as a function of time $t$.
+
+\item \textbf{[4 marks]}
+What is the average node degree $\langle k \rangle$ at time $t$? What is the average node degree in the limit $t \to \infty$?
+
+\item \textbf{[3 marks]}
+Find an expression for the value of $Z$ as a function of time $t$.
+
+\item \textbf{[7 marks]}
+Write down the differential equation governing the time evolution of the degree $k_i$ of node $i$ for $t \gg 1$ in the mean-field approximation. Solve this equation with the initial condition $k_i(t_i) = m$, where $t_i$ is the time of arrival of node $i$.
+
+\item \textbf{[7 marks]}
+Derive the degree distribution $P(k)$ of the network for $t \gg 1$ in the mean-field approximation.
+
+\item \textbf{[4 marks]}
+Does the model produce scale-free networks? If so, what is the value of the degree exponent $\gamma$?
+
+\item \textbf{[6 marks]}
+Write down the master equation of the model, i.e.\ the equation that describes the evolution of the average number $N_k(t)$ of nodes that at time $t$ have degree $k$.
+
+\end{enumerate}
+
+\end{document}

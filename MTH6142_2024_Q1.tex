@@ -1,0 +1,59 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{MTH6142 (2024) --- Question 1}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Question 1 [50 marks].}
+
+Consider the directed network $G = (V, E)$ with $N = 5$ nodes and $L = 8$ links, in which:
+\begin{itemize}[nosep]
+  \item node $1$ points to nodes $2$ and $3$;
+  \item node $2$ points to node $4$;
+  \item node $3$ points to nodes $2$ and $4$;
+  \item node $4$ points to node $2$;
+  \item node $5$ points to nodes $3$ and $4$.
+\end{itemize}
+
+\begin{enumerate}[label=\textbf{(\alph*)}, leftmargin=*, itemsep=1.1em]
+
+\item \textbf{[6 marks]}
+Draw the network and write down its adjacency matrix $\mathbf{A}$.
+
+\item \textbf{[6 marks]}
+How many weakly-connected components and how many non-trivial (i.e.\ with more than one node) strongly-connected components are there in the network? List all the nodes belonging to each one of these components. List all the nodes belonging, respectively, to the in-component and the out-component of each of the non-trivial strongly-connected components.
+
+\item \textbf{[6 marks]}
+Determine the in-degree sequence $\{k_1^{\mathrm{in}}, k_2^{\mathrm{in}}, k_3^{\mathrm{in}}, k_4^{\mathrm{in}}, k_5^{\mathrm{in}}\}$ and the out-degree sequence $\{k_1^{\mathrm{out}}, k_2^{\mathrm{out}}, k_3^{\mathrm{out}}, k_4^{\mathrm{out}}, k_5^{\mathrm{out}}\}$ of the network. Write down the average node in-degree, the average node out-degree, the node in-degree distribution $P^{\mathrm{in}}(k)$ and the node out-degree distribution $P^{\mathrm{out}}(k)$.
+
+\item \textbf{[3 marks]}
+Calculate the normalised in-degree centrality $x_i$ of each node of the network and rank the nodes, from the most to the least central, according to their in-degree centrality.
+
+\item \textbf{[10 marks]}
+Calculate the eigenvector centrality $x_i$ of each node of the network and rank the nodes, from the most to the least central, according to their eigenvector centrality. To obtain the eigenvector centrality, start from the initial guess $\mathbf{x}^{(0)} = \frac{1}{N}\mathbf{1}$ where $\mathbf{1}$ is the $N$-dimensional column vector of elements $1_i = 1$ for all $i = 1, 2, \ldots, N$, and use the following recursive rule:
+\[
+  \mathbf{x}^{(n)} = \mathbf{A}\,\mathbf{x}^{(n-1)},
+\]
+where $n \in \mathbb{N}$. Finally calculate the eigenvector centrality $x_i$ of each node $i$ of the network from the limit:
+\[
+  x_i = \lim_{n \to \infty} \frac{x_i^{(n)}}{\sum_{j=1}^{N} x_j^{(n)}}.
+\]
+Can you obtain the same result by directly calculating eigenvalues and eigenvectors of the adjacency matrix?
+
+\item \textbf{[12 marks]}
+State the definition of the Katz centrality. Calculate the Katz centrality $x_i$ of each node of the network and rank the nodes, from the most to the least central, according to their Katz centrality. Do you get a different ranking from that obtained based on the eigenvector centrality? Explain why.
+
+\item \textbf{[7 marks]}
+Calculate the $N \times N$ matrix $\mathbf{d}$ whose element $d_{ij}$ is the length of the shortest paths from node $i$ to node $j$. Calculate the efficiency centrality $x_i$ of each node of the network and rank the nodes, from the most to the least central, according to their efficiency centrality.
+
+\end{enumerate}
+
+\end{document}

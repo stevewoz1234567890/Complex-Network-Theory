@@ -1,0 +1,61 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{MTH6142 (2024) --- Question 2}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Question 2 [50 marks].}
+
+A model for growing simple networks is defined as follows. At time $t = 1$ the process starts with a complete network of $n_0 = 6$ nodes. At each time step $t > 1$, one new node is added. Each new node arrives with $m = 2$ new links, which are connected to $m = 2$ different nodes already present in the network. The probability $\Pi_i$ that a new link is attached to an existing node $i$ is
+\[
+  \Pi_i = \frac{k_i - 1}{Z}
+  \qquad\text{with}\qquad
+  Z = \sum_{j=1}^{N(t-1)} (k_j - 1),
+\]
+where $k_i$ is the degree of node $i$, and $N(t-1)$ is the total number of nodes in the network at time $t-1$.
+
+\begin{enumerate}[label=\textbf{(\alph*)}, leftmargin=*, itemsep=1.1em]
+
+\item \textbf{[8 marks]}
+Find expressions for:
+\begin{itemize}[nosep]
+  \item the number of nodes $N(t)$ as a function of time $t$;
+  \item the number of links $L(t)$ as a function of time $t$;
+  \item the value of $Z$ as a function of time $t$.
+\end{itemize}
+
+\item \textbf{[4 marks]}
+What is the average node degree $\langle k \rangle$ at time $t$? What is the average node degree in the limit $t \to \infty$?
+
+\item \textbf{[7 marks]}
+Write down the differential equation governing the time evolution of the degree $k_i$ of node $i$ for $t \gg 1$ in the mean-field approximation. Solve this equation with the initial condition $k_i(t_i) = m$, where $t_i$ is the time of arrival of node $i$.
+
+\item \textbf{[8 marks]}
+Derive the degree distribution $P(k)$ of the network for $t \gg 1$ in the mean-field approximation. Determine if the model produces scale-free networks. If so, find the value of the degree exponent $\gamma$.
+
+\item \textbf{[6 marks]}
+Write down the master equation of the model, which describes the evolution of the average number $N_k(t)$ of nodes that have degree $k$ at time $t$.
+
+\item \textbf{[8 marks]}
+Suppose the growth process is iterated until the final network has $N = 10^6$ nodes (with $m = 2$). Let $K$ be the natural cutoff. Treating the degree $k$ as a continuous variable, evaluate:
+\begin{itemize}[nosep]
+  \item the natural cutoff $K$;
+  \item the normalization constant in the degree distribution;
+  \item the average degree $\langle k \rangle$;
+  \item the second moment of the degree distribution $\langle k^2 \rangle$.
+\end{itemize}
+
+\item \textbf{[9 marks]}
+Calculate the probability of finding a node with $1000$ links in the network obtained in point~(f). Calculate the probability of finding a node with $1000$ links in an Erd\H{o}s--R\'enyi random graph with the same number of nodes and links as the network in point~(f).
+
+\end{enumerate}
+
+\end{document}
